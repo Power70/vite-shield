@@ -40,10 +40,18 @@ app.use(helmet({
       scriptSrc: ["'self'", "'unsafe-inline'"],
       styleSrc: ["'self'", "https:"],
       imgSrc: ["'self'", "data:"],
-      frameAncestors: ["'none'"] // Matching your Nginx "DENY" policy
+      frameAncestors: ["'self'"]
     }
   },
-  frameguard: { action: 'deny' } // Explicitly set X-Frame-Options to DENY
+  xFrameOptions: { action: 'sameorigin' },
+  strictTransportSecurity: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true
+  },
+  referrerPolicy: { policy: 'no-referrer' },
+  xDnsPrefetchControl: { allow: false },
+  xPermittedCrossDomainPolicies: { permittedPolicies: 'none' }
 }));
 
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -67,12 +75,15 @@ server {
     index index.html;
 
     # ✅ Security headers
-    add_header X-Frame-Options "DENY" always;
-    add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'none';" always;
-    add_header X-Content-Type-Options "nosniff" always;
-    add_header X-XSS-Protection "0; mode=block" always;
     add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https:; img-src 'self' data:; frame-ancestors 'self'" always;
+    add_header X-Content-Type-Options "nosniff" always;
     add_header Referrer-Policy "no-referrer" always;
+    add_header X-DNS-Prefetch-Control "off" always;
+    add_header X-Download-Options "noopen" always;
+    add_header X-Permitted-Cross-Domain-Policies "none" always;
+    add_header X-XSS-Protection "0" always;
 
     location / {
         try_files $uri /index.html;
