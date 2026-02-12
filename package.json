@@ -1,0 +1,25 @@
+{
+  "name": "vite-shield",
+  "version": "1.0.0",
+  "description": "One-click security headers for Vite/React",
+  "main": "lib/transformer.js",
+  "bin": {
+    "vite-shield": "bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Power70/vite-shield.git"
+  },
+  "keywords": [],
+  "author": "Power70",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "jscodeshift": "^17.3.0"
+  }
+}
