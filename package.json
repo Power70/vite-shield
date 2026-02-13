@@ -4,8 +4,14 @@
   "description": "One-click security headers for Vite/React",
   "main": "lib/transformer.js",
   "bin": {
-    "vite-shield": "bin/cli.js"
+    "vite-shield": "bin/cli.cjs"
   },
+  "files": [
+    "bin",
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,10 +19,24 @@
     "type": "git",
     "url": "git+https://github.com/Power70/vite-shield.git"
   },
-  "keywords": [],
-  "author": "Power70",
+  "keywords": [
+    "vite",
+    "react",
+    "security",
+    "headers",
+    "csp",
+    "content-security-policy",
+    "helmet",
+    "express",
+    "nginx",
+    "security-headers",
+    "xss-protection",
+    "hsts",
+    "clickjacking"
+  ],
+  "author": "Torzor Peter",
   "license": "MIT",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "express": "^5.2.1",
     "helmet": "^8.1.0",
